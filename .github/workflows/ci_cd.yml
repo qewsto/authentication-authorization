@@ -1,0 +1,25 @@
+# Название
+name: CI
+# На какой триггер будет реагировать чтобы запуститься
+on:
+  # этот workflow будем запускать в ручном режиме
+  workflow_dispatch:
+# что будет запущено
+jobs:
+  # имя job
+  build:
+    # на какой машине (операционной системе надо запустить воркфлоу)
+    runs-on: ubuntu-latest
+    # шаги
+    steps:
+      # имя шага
+      - uses: actions/checkout@v3
+      # имя шага 
+      - name: Run a one-line script
+        run: echo Hello, world!
+      # имя шага
+      - name: Run a multi-line script
+        # запуск команды
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project.
