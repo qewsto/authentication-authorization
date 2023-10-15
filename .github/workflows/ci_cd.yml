@@ -22,7 +22,6 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           projectBaseDir: src/main/java
-        run: ./gradlew build sonar --info
         # actions/setup-java@v3 скачивает java, и позволяет настроить запуск проекта
       - uses: actions/setup-java@v3
         with:
@@ -32,7 +31,7 @@ jobs:
         # без этих 2 строк ниже будет ошибка ./gradlew: Permission denied
       - name: Change wrapper permissions
         run: chmod +x ./gradlew
-      - run: ./gradlew build --no-daemon
+      - run: ./gradlew build sonar --info --no-daemon
       - name: Cache Gradle packages
         uses: actions/cache@v3
         with:
