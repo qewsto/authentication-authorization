@@ -49,10 +49,3 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
-
-jacocoTestReport {
-	reports {
-		xml.required = true
-		html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
-	}
-}
