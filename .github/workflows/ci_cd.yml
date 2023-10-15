@@ -1,29 +1,39 @@
-# name: Название
-name: CI
-# on: На какой триггер будет реагировать чтобы запуститься
+name: CI/CD
 on:
-  # workflow_dispatch: этот workflow будем запускать в ручном режиме
-  workflow_dispatch:
-# jobs: список job которые будут запущены
+  push:
+    branches:
+      - main
+      - master
+      - develop
+      - 'releases/**'
+  pull_request:
+    types: [opened, synchronize, reopened]
 jobs:
-  # build: имя job
-  build:
-    # runs-on: на какой машине (операционной системе надо запустить воркфлоу)
+  sonarqube:
     runs-on: ubuntu-latest
-    # steps: шаги
     steps:
-      # - name: имя шага
+    - uses: actions/checkout@v3
+      with:
+       fetch-depth: 0
+    - name: SonarQube Scan
+      uses: sonarsource/sonarqube-scan-action@master
+      with:
+        projectBaseDir: app/src
+        args: >
+          -Dsonar.tests=tests/
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        SONAR_ROOT_CERT: ${{ secrets.SONAR_ROOT_CERT }}
+        LC_ALL: "ru_RU.UTF-8"
+  build:
+    runs-on: ubuntu-latest
+    steps:
       - name: Get repository code
-        # run: запуск команды
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
-        # uses: запуск actions из маркетплейса
         # actions/checkout@v3 извлекает репозиторий чтобы workflow мог получить к нему доступ
-      - uses: actions/checkout@v3
+        uses: actions/checkout@v3
         # actions/setup-java@v3 скачивает java, и позволяет настроить запуск проекта
       - uses: actions/setup-java@v3
-        # with: запустить с следующими параметрами
         with:
           distribution: 'temurin'
           java-version: '21'
