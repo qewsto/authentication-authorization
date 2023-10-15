@@ -7,9 +7,10 @@ plugins {
 
 sonar {
 	properties {
-		property "sonar.projectKey", "qewsto_authentication-authorization"
-		property "sonar.organization", "like-jira"
-		property "sonar.host.url", "https://sonarcloud.io"
+		property('sonar.projectName', 'Example of SonarQube Scanner for Gradle Usage')
+		property("sonar.projectKey", "sonarqube-scanner-gradle")
+		property("sonar.sources", "src/main/java")
+		property "sonar.tests", "src/test"
 	}
 }
 
