@@ -28,4 +28,7 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
           cache: 'gradle'
+        # без этих 2 строк ниже будет ошибка ./gradlew: Permission denied
+      - name: Change wrapper permissions
+        run: chmod +x ./gradlew
       - run: ./gradlew build --no-daemon
