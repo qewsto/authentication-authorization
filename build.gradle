@@ -7,11 +7,9 @@ plugins {
 
 sonar {
 	properties {
-		property("sonar.projectKey", "qewsto_authentication-authorization")
-		property("sonar.organization", "like-jira")
-		property("sonar.host.url", "https://sonarcloud.io")
-		property("sonar.sources", "src/main/java")
-		property("sonar.tests", "src/test")
+		property "sonar.projectKey", "qewsto_authentication-authorization"
+		property "sonar.organization", "like-jira"
+		property "sonar.host.url", "https://sonarcloud.io"
 	}
 }
 
